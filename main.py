@@ -1,4 +1,4 @@
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 import time
 
 #pip install playwright
@@ -27,14 +27,17 @@ with sync_playwright() as pw:
     #pagina.get_by_role("link", name="Fale Conosco").click()
 
 #Preencher um formulário
-    pagina.get_by_role("textbox", name="Usuário:").fill("coloque o usuario")
-    pagina.get_by_role("textbox", name="Senha:").fill("coloque a senha")
+    pagina.get_by_role("textbox", name="Usuário:").fill("coloque o usuário aqui")
+    pagina.get_by_role("textbox", name="Senha:").fill("coloque a senha aqui")
     pagina.get_by_role("button", name="Acessar").click()
     pagina.get_by_role("link", name="Meus Dados").click()
     pagina.get_by_role("link", name="Documentos ").click()
-    pagina.get_by_role("link", name="Declaração de Matrícula").click()
     
-  
+    
+  #esperar um elemento na tela 
+    novo_botao = pagina.get_by_role("link", name="Declaração de Matrícula")
+    expect(novo_botao).to_be_visible()
+    novo_botao.click()
 
 
 
